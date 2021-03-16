@@ -335,13 +335,14 @@ class Map(Graph):
         for i in self:
             radius = self.nodes[i]['hex'].radius
             center = self.nodes[i]['hex'].center
-            self.draw_hex(screen, (0, 0, 255), 6, radius * 1.12, center)
+            self.draw_hex(screen, (255, 0, 0), 6, radius * 1.12, center)
+            """
             pygame.draw.circle(screen,
-                               (255, 0, 0),
+                               (255, 0, 255),
                                (self.nodes[i]['hex'].center[0],
                                 self.nodes[i]['hex'].center[1]),
                                self.nodes[i]['hex'].radius, 0)
-
+                            """
 #############################
 #       STATIC METHODS      #
 #############################
@@ -366,9 +367,9 @@ class Map(Graph):
 
         """
         if (player_num % 2 == 1):
-            return ((player_num+2)*4)
+            return ((player_num+1)*4)
         else:
-            return ((player_num+2)*4)
+            return ((player_num+1)*4)
 
     # Test Function to draw N-Gons
 
@@ -430,6 +431,7 @@ class Map(Graph):
         pygame.draw.polygon(surface, color,
                             [(math.sin(i / n * pi2) * r + x, math.cos(i / n * pi2) * r + y)
                              for i in range(0, n)])
+
         pygame.draw.polygon(surface, (0, 0, 0),
                             [(math.sin(i / n * pi2) * r + x, math.cos(i / n * pi2) * r + y)
-                             for i in range(0, n)], 3)
+                             for i in range(0, n)], 2)
