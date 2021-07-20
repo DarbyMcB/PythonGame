@@ -50,6 +50,7 @@ class Hex:
             Exception: description
 
         """
+        self._attribute = 0
         self._index = index
         self._radius = radius
         self._center = [center_x, center_y]
