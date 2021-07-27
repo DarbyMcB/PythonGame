@@ -12,7 +12,7 @@ from Player import Player
 from Map import Map
 
 
-WIN_SIZE = [1080, 720]
+WIN_SIZE = [1920, 1020]
 
 
 def main():
@@ -90,7 +90,7 @@ def start_game(screen, player_num) -> None:
     while run:
         # lock Framerate
         clock.tick(fps)
-        # Process Input
+        # Process Input9
         map.drawmap(screen)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

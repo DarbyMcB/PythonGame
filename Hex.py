@@ -17,7 +17,7 @@ Raises:
 import random
 
 
-class Hex:
+class Hex(object):
     """
     A short description.
 
@@ -34,7 +34,7 @@ class Hex:
 
     """
 
-    def __init__(self, index=0, active=0, radius=0, center_x=0, center_y=0):
+    def __init__(self, index=0, radius=0, center=[0, 0], axial=[0, 0], active=0):
         """
         Initialize Hex.
 
@@ -50,14 +50,12 @@ class Hex:
             Exception: description
 
         """
-        self._attribute = 0
         self._index = index
         self._radius = radius
-        self._center = [center_x, center_y]
+        self._center = [center[0], center[1]]
+        self._coord = [axial[0], axial[1]]
         self._active = active
-        self._color = (128*active + 127 - (255 if self._index == 19 else 0),
-                       128*active + 127 - (255 if self._index == 19 else 0),
-                       128*active + 127 - (255 if self._index == 19 else 0))
+        self._color = (50, 50, 50)
 
     def get_index(self):
         return self._index
@@ -83,11 +81,21 @@ class Hex:
         return self._center
 
     def set_center(self, center):
-        self._center = center
+        self._center = [center[0], center[1]]
 
     def del_center(self):
         del self._center
     center = property(get_center, set_center, del_center)
+
+    def get_coord(self):
+        return self._coord
+
+    def set_coord(self, axial):
+        self._coord = [axial[0], axial[1]]
+
+    def del_coord(self):
+        del self._coord
+    coord = property(get_coord, set_coord, del_coord)
 
     def get_active(self):
         return self._active

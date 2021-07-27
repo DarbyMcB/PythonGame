@@ -8,9 +8,16 @@ import networkx as nx
 from networkx import Graph
 import pandas as pd
 import numpy as np
-from Hex import Hex
+from City import City
+from Swamp import Swamp
+from Forest import Forest
+from Plains import Plains
+from Mountain import Mountain
+from Hill import Hill
+from Lake import Lake
 # from Player import Player
 import math
+import random
 import pygame
 import matplotlib.pyplot as plt
 
@@ -131,30 +138,40 @@ class Map(Graph):
         nodes = []
         # Make sure hex postion and map position are aligned
         hex_center = self._center
+        hex_coord = [0, 0]
         hex_radius = 50
-        index = 0
+        terrain = []
+        index = 0  # Super easy way to keep track of which node we're on
         # Transformations for going clockwise around the map
         x_shift = [3*hex_radius/2, 0, -3*hex_radius/2,
                    -3*hex_radius/2, 0, 3*hex_radius/2]
         y_shift = [math.sqrt(3)*hex_radius/2, math.sqrt(3)*hex_radius, math.sqrt(3)*hex_radius/2,
                    -math.sqrt(3)*hex_radius/2, -math.sqrt(3)*hex_radius, -math.sqrt(3)*hex_radius/2]
+        q_shift = [1, 0, -1, -1, 0, 1]
+        r_shift = [0, 1, 1, 0, -1, -1]
+        terrain = self.gen_terrain(self._degree, hex_radius)
+        for type in terrain:
+            nodes.append(type)
         # First hex at map center
-        nodes.append(Hex(index, 1, hex_radius, hex_center[0], hex_center[1]))
+        nodes[0].center = [hex_center[0], hex_center[1]]
+        nodes[0].hex_coord = [hex_coord[0], hex_coord[1]]
         # For each ring
         for k in range(0, self._degree):
             n = 0
             # Each new ring starts directly above the previous ring start
             hex_center[1] -= math.sqrt(3)*hex_radius
+            hex_coord[1] -= 1
             # For each side
             for n in range(0, 6):
                 # For each hex on a side (side length is proportional to degree of ring)
                 for i in range(0, k + 1):
                     index += 1
-                    nodes.append(Hex(index, (1 if n == 0 else 0),
-                                     hex_radius, hex_center[0], hex_center[1]))
+                    nodes[index].center = [hex_center[0], hex_center[1]]
+                    nodes[index].coord = [hex_coord[0], hex_coord[1]]
                     hex_center[0] = hex_center[0] + x_shift[n]
                     hex_center[1] = hex_center[1] + y_shift[n]
-
+                    hex_coord[0] = hex_coord[0] + q_shift[n]
+                    hex_coord[1] = hex_coord[1] + r_shift[n]
         return nodes
 
     def add_hexes(self, nodes):
@@ -478,9 +495,34 @@ class Map(Graph):
         pygame.draw.polygon(surface, (0, 0, 0),
                             [(math.cos(i / n * pi2) * r + x, math.sin(i / n * pi2) * r + y)
                              for i in range(0, n)], 3)
-        GAME_FONT = pygame.font.SysFont('Comic Sans MS', 30)
-        text_surface = GAME_FONT.render(str(hex.index), False, (255, 0, 255))
-        surface.blit(text_surface, (hex.center[0]-5, hex.center[1] - 15))
+
+        # Code for displaying "hidden" hex attributes e.g. terrain, location, index, whatever
+        GAME_FONT = pygame.font.SysFont('Comic Sans MS', 15)
+        text_surface = GAME_FONT.render(str(hex.coord), False, (255, 0, 255))
+        GAME_FONT = pygame.font.SysFont('Comic Sans MS', 15)
+        text_surface_2 = GAME_FONT.render(str(hex.type), False, (255, 255, 255))
+        surface.blit(text_surface, (hex.center[0]-20, hex.center[1] - 10))
+        surface.blit(text_surface_2, (hex.center[0]-20, hex.center[1] - 30))
+
+    @staticmethod
+    def gen_terrain(degree, hex_radius):
+        mult = (degree - 2)
+        terrain = []
+        for k in range(0, 4*mult):
+            terrain.append(Swamp(k, hex_radius))
+            terrain.append(Mountain(k, hex_radius))
+            terrain.append(Lake(k, hex_radius))
+        for k in range(0, 5*mult):
+            terrain.append(Hill(k, hex_radius))
+        for k in range(0, 9*mult):
+            terrain.append(City(k, hex_radius))
+            terrain.append(Forest(k, hex_radius))
+        for k in range(0, 10*mult):
+            terrain.append(Plains(k, hex_radius))
+        random.shuffle(terrain)
+        for i in range(0, 28*mult):
+            terrain[i].index = i
+        return (terrain)
 
     """
     PROPERTIES

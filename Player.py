@@ -40,5 +40,5 @@ class Player:
 
         """
         self.name = name
-        self.location = location
-        self.color = color
+        self._coord = location
+        self._color = color
