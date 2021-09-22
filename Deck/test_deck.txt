@@ -1,0 +1,3 @@
+deck_title=Core Deck
+num_cards=5
+card_source=Test_Deck/

@@ -1,0 +1,3 @@
+card_name=Forward March!
+card_cost=3
+card_rules=All Allied Units Get An Extra Move Action This Turn

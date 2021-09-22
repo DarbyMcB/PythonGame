@@ -1,18 +1,18 @@
 """
-Lake File.
+Plains File.
 
-Specific class for Lake Terrain
+Specific class for Plains Terrain
 
 """
 
-from Terrain import Terrain
+from .Terrain import Terrain
 
 
-class Lake(Terrain):
+class Plains(Terrain):
 
     def __init__(self, index, radius):
         """
-        Constructs characteristics for a Lake.
+        Constructs characteristics for a Plains.
 
         A bit longer description.
 
@@ -27,13 +27,13 @@ class Lake(Terrain):
 
         """
         super().__init__(index, radius)
-        self._type = "Lake"
+        self._type = "Plains"
         self._gold = 0
         self._VP = 0
         self._defense_bonus = 0
-        self._prerequisites = 0
-        self._artillery = 0  # adds 1 to Artillery rolls from this tile
-        self._passable = False
-        self._shoot_over = True
+        self._prerequisites = 1
+        self._artillery = 0
+        self._passable = True
+        self._shoot_over = False
 
-        self._color = (0, 0, 255)
+        self._color = (200, 200, 100)

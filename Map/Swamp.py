@@ -1,18 +1,18 @@
 """
-City File.
+Swamp File.
 
-City class for City Terrain
+Specific class for Swamp Terrain
 
 """
 
-from Terrain import Terrain
+from .Terrain import Terrain
 
 
-class City(Terrain):
+class Swamp(Terrain):
 
     def __init__(self, index, radius):
         """
-        Constructs characteristics for a City
+        Constructs characteristics for a Swamp.
 
         A bit longer description.
 
@@ -27,13 +27,13 @@ class City(Terrain):
 
         """
         super().__init__(index, radius)
-        self._type = "City"
-        self._gold = 2
-        self._VP = 1
-        self._defense_bonus = 2
-        self._prerequisites = 2
+        self._type = "Swamp"
+        self._gold = 0
+        self._VP = 0
+        self._defense_bonus = -2
+        self._prerequisites = 1
         self._artillery = 0
         self._passable = True
         self._shoot_over = False
 
-        self._color = (0, 200, 200)
+        self._color = (50, 50, 50)

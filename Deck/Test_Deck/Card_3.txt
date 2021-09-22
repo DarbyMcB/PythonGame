@@ -1,0 +1,3 @@
+card_name=Give Moneys
+card_cost=0
+card_rules=Get 5 Gold

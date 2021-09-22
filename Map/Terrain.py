@@ -4,7 +4,7 @@ Terrain File.
 Base class for all inherited terrain types
 
 """
-from Hex import Hex
+from .Hex import Hex
 
 
 class Terrain(Hex):

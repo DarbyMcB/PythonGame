@@ -5,7 +5,7 @@ Specific class for Hill Terrain
 
 """
 
-from Terrain import Terrain
+from .Terrain import Terrain
 
 
 class Hill(Terrain):

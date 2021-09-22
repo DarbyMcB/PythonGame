@@ -8,8 +8,7 @@ Contains the primary game loop
 
 import pygame
 import pygame_menu
-from Player import Player
-from Map import Map
+from GameController import GameController
 
 
 WIN_SIZE = [1920, 1020]
@@ -78,25 +77,8 @@ def start_game(screen, player_num) -> None:
         Exception: description
 
     """
-    player_list = list(Player(f"Player {x}") for x in range(player_num))
-    for player in player_list:
-        print(player.name)
-
-    # Create Game Board
-    map = Map(player_num, WIN_SIZE[0], WIN_SIZE[1])
-    clock = pygame.time.Clock()
-    run = True
-    fps = 30
-    while run:
-        # lock Framerate
-        clock.tick(fps)
-        # Process Input9
-        map.drawmap(screen)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-        # Updates the display with all changes
-        pygame.display.update()
+    game = GameController(screen, WIN_SIZE[0], WIN_SIZE[1], player_num)
+    game.run_game()
 
 
 if __name__ == '__main__':

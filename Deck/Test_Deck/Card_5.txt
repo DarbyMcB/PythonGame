@@ -1,0 +1,3 @@
+card_name=At Any Cost
+card_cost=10
+card_rules=Sacrifice up to 5 units, for each unit sacrificed, destroy one adjacent enemy unit.

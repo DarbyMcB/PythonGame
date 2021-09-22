@@ -1,0 +1,3 @@
+card_name=Do a Little Dance
+card_cost=1
+card_rules=All Units Gain 1 Morale

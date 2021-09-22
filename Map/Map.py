@@ -8,13 +8,13 @@ import networkx as nx
 from networkx import Graph
 import pandas as pd
 import numpy as np
-from City import City
-from Swamp import Swamp
-from Forest import Forest
-from Plains import Plains
-from Mountain import Mountain
-from Hill import Hill
-from Lake import Lake
+from .City import City
+from .Swamp import Swamp
+from .Forest import Forest
+from .Plains import Plains
+from .Mountain import Mountain
+from .Hill import Hill
+from .Lake import Lake
 # from Player import Player
 import math
 import random

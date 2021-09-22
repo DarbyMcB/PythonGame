@@ -1,0 +1,3 @@
+card_name=KILLKILLKILL
+card_cost=4
+card_rules=Kill a target Unit

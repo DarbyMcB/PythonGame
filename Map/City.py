@@ -1,18 +1,18 @@
 """
-Mountain File.
+City File.
 
-Specific class for Mountain Terrain
+City class for City Terrain
 
 """
 
-from Terrain import Terrain
+from .Terrain import Terrain
 
 
-class Mountain(Terrain):
+class City(Terrain):
 
     def __init__(self, index, radius):
         """
-        Constructs characteristics for a Mountain.
+        Constructs characteristics for a City
 
         A bit longer description.
 
@@ -27,13 +27,13 @@ class Mountain(Terrain):
 
         """
         super().__init__(index, radius)
-        self._type = "Mountain"
-        self._gold = 0
-        self._VP = 0
+        self._type = "City"
+        self._gold = 2
+        self._VP = 1
         self._defense_bonus = 2
-        self._prerequisites = 1
-        self._artillery = 1  # adds 1 to Artillery rolls from this tile
+        self._prerequisites = 2
+        self._artillery = 0
         self._passable = True
         self._shoot_over = False
 
-        self._color = (255, 0, 0)
+        self._color = (0, 200, 200)
